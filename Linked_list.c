@@ -81,12 +81,9 @@ void linked_list_add_to_head(Linked_list *list, void* data) {
 void linked_list_add_to_foot(Linked_list *list, void* data) {
   node* new_node = malloc(sizeof(node));
   new_node->data = data;
-  printf("got here \n");
   //if head and foot are NULL initialize
   if(list->is_empty){
-	printf("got here2 \n");
     set_foot(list, new_node);
-	printf("got here3 \n");
     list->is_empty = 0;
     list->head->prev = NULL;
     list->head->next = NULL;
@@ -137,9 +134,3 @@ void* linked_list_remove_from_foot(Linked_list *list) {
   }
   return process;
 }
-
-
-
-
-
-

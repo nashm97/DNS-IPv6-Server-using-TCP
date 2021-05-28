@@ -8,7 +8,6 @@
 #include "Message.h"
 
 void read_into_message(Message* message, FILE* log, int file_descriptor){
-	printf("INSIDE MESSAGE\n");
 	// read in the header and the question
 	read_into_header(&(message->header), log, file_descriptor);
 	read_into_question(&(message->question), log, file_descriptor);
@@ -16,7 +15,6 @@ void read_into_message(Message* message, FILE* log, int file_descriptor){
 	// read in the answers
 	Resource_record* answers= malloc(sizeof(Resource_record)*message->header.ANCOUNT);
 	message->answer = answers;
-	printf("NUMBER OF ANSWERS TO READ IN %d\n", message->header.ANCOUNT);
 	for(int i=0;i<message->header.ANCOUNT;i++){
 
 		read_into_resource_record(&(message->answer[i]), log, file_descriptor);
@@ -25,7 +23,6 @@ void read_into_message(Message* message, FILE* log, int file_descriptor){
 	// read in the authoritative records
 	Resource_record* authoritative= malloc(sizeof(Resource_record)*message->header.NSCOUNT);
 	message->authoritative = authoritative;
-	printf("NUMBER OF AUTHORITATIVE TO READ IN %d\n", message->header.NSCOUNT);
 	for(int i=0;i<message->header.NSCOUNT;i++){
 
 		read_into_resource_record(&(message->authoritative[i]), log, file_descriptor);
@@ -35,7 +32,6 @@ void read_into_message(Message* message, FILE* log, int file_descriptor){
 	// read in the additional records
 	Resource_record* additional= malloc(sizeof(Resource_record)*message->header.ARCOUNT);
 	message->additional = additional;
-	printf("NUMBER OF ADDITIONAL TO READ IN %d\n", message->header.ARCOUNT);
 	for(int i=0;i<message->header.ARCOUNT;i++){
 		read_into_resource_record(&(message->additional[i]), log, file_descriptor);
 	}
@@ -66,7 +62,6 @@ char* Message_to_string(Message* message, char* chars){
 	chars[3] = message->header.ID[0];
 	chars[4] = message->header.ID[2];
 	chars[5] = message->header.QR_to_RCODE[0];
-	printf("in message got here 12\n");
 	chars[6] = message->header.QR_to_RCODE[1];
 	chars[7] = message->header.QDCOUNT_as_char[0];
 	chars[8] = message->header.QDCOUNT_as_char[1];
@@ -74,7 +69,6 @@ char* Message_to_string(Message* message, char* chars){
 	chars[10] = message->header.ANCOUNT_as_char[1];
 	chars[11] = message->header.NSCOUNT_as_char[0];
 	chars[12] = message->header.NSCOUNT_as_char[1];
-	printf("in message got here 13\n");
 	chars[13] = message->header.ARCOUNT_as_char[0];
 	chars[14] = message->header.ARCOUNT_as_char[1];
 
@@ -114,17 +108,6 @@ char* Message_to_string(Message* message, char* chars){
 	for( int i=0;i<message->header.ARCOUNT;i++){
 		index = record_to_string(&(message->additional[i]), chars, index);
 	}
-
-	printf("in message got here 18\n");
-
-	/*// convert the rest of the message to a char
-	for(int p=0;p<message->length_of_rest_of_message;p++){
-		chars[29+added_length] = message->rest_of_message[p];
-		added_length+=1;
-	}*/
-
-	printf("in message got here 19\n");
-
 
 	//return the created char*
 	return chars;

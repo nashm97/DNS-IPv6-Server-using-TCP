@@ -20,7 +20,6 @@ void read_into_hex(char* hex, int length, FILE* log, int file_descriptor){
 		}
 		else{number_of_zeros_in_a_row = 0;}
 		if(number_of_zeros_in_a_row>100){
-			printf("too many zeros\n");
 			exit(EXIT_FAILURE);
 		}
 		print_byte_as_binary(hex[i]);
@@ -76,4 +75,3 @@ unsigned char set_bits_in_byte_to_value(unsigned char byte, int high, int low, i
 	}
 	return new_byte;
  }
-

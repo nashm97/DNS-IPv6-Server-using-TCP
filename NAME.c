@@ -10,13 +10,10 @@
 
 
 void read_into_NAME(NAME* name, FILE* log, int file_descriptor){
-	printf("inside NAME\n");
-	printf("inside read in name \n");
 	name->length_of_name =0;
 	Linked_list* linked_list = new_linked_list();
 	int number_of_labels=0;
 	int NAME_finished=0;
-	printf("got here\n");
 
 	// while we have not reached the end of the QNAME
 	while(!NAME_finished){
@@ -32,8 +29,6 @@ void read_into_NAME(NAME* name, FILE* log, int file_descriptor){
 			number_of_labels +=1;
 		}
 	}
-	printf("NAME finished\n");
-	printf("number of labels = %d\n", number_of_labels);
 
 
 	// create the right amount of space for the number of labels
